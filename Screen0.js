@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   content2:{
    textAlign:'center',
+   marginTop:10
    
   },
   button:{
