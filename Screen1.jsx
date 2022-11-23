@@ -76,10 +76,11 @@ const GridView = ({ anh, firstname }) => {
         </View>
     )
 }
-const GridViews = ({ hinhsanpham, tesanpham, gia ,navigation={navigation}}) => {
+const GridViews = ({ hinhsanpham, tesanpham, gia, navigation}) => {
     
-    const onpress = ()=>{
-        navigation.navigate('Screen2', {hinhsanpham},{tesanpham}, {gia})
+    const onHandlePress = ()=>{
+        console.log('onHandlePress');
+        navigation.navigate('Screen2', {gia})
     }
 
     return (
@@ -93,7 +94,7 @@ const GridViews = ({ hinhsanpham, tesanpham, gia ,navigation={navigation}}) => {
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", margin: 5, padding: 4 }}>
                 <Text style={{fontSize:20}}>{gia}</Text>
                 <View>
-                    <Button color={"red"} title='Add Cart' onPress={onpress}></Button>
+                    <Button color={"red"} title='Add Cart' onPress={onHandlePress}></Button>
                 </View>
             </View>
         </View>
