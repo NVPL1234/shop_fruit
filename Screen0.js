@@ -1,11 +1,9 @@
-import React, { useContext, createContext, useEffect } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, Text, Button , Image} from 'react-native';
 
 
 
-
-export default function Screen0() {
-
+export default function Screen0({ navigation })  {
 
   return (
     <View style={styles.container}>
@@ -23,9 +21,9 @@ export default function Screen0() {
      </View>
      <View>
         <Text style={styles.content2}>Countrywide Free Deliverry</Text>
-      </View>
+    </View>
       <View style={styles.button}>
-        <Button color={"#00cc00"} title='Get Started'/>
+        <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Screen1')}} />
       </View>
     </View>
   );
