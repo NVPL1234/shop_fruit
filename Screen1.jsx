@@ -76,7 +76,12 @@ const GridView = ({ anh, firstname }) => {
         </View>
     )
 }
-const GridViews = ({ hinhsanpham, tesanpham, gia }) => {
+const GridViews = ({ hinhsanpham, tesanpham, gia ,navigation={navigation}}) => {
+    
+    const onpress = ()=>{
+        navigation.navigate('Screen2', {hinhsanpham},{tesanpham}, {gia})
+    }
+
     return (
         <View style={{}}>
             <View style={{marginLeft:16}}>
@@ -88,7 +93,7 @@ const GridViews = ({ hinhsanpham, tesanpham, gia }) => {
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", margin: 5, padding: 4 }}>
                 <Text style={{fontSize:20}}>{gia}</Text>
                 <View>
-                    <Button color={"red"} title='Add Cart'></Button>
+                    <Button color={"red"} title='Add Cart' onPress={onpress}></Button>
                 </View>
             </View>
         </View>
@@ -197,7 +202,7 @@ const Castory = () => {
         </View>
     )
 }
-const ListSanPham = () => {
+const ListSanPham = ({navigation}) => {
     return (
         <View>
             <View>
@@ -206,14 +211,14 @@ const ListSanPham = () => {
             <View style={{ flex: 1, width: "100%", height: "100%" }}>
                 <FlatList
                     data={danhsachsanpham}
-                    renderItem={({ item }) => <GridViews hinhsanpham={item.hinhsanpham} tesanpham={item.tesanpham} gia={item.gia} />}
+                    renderItem={({ item }) => <GridViews hinhsanpham={item.hinhsanpham} tesanpham={item.tesanpham} gia={item.gia} navigation={navigation} />}
                     numColumns={3}
                 />
             </View>
         </View>
     )
 }
-const Screen1 = () => {
+const Screen1 = ({ navigation }) => {
     return (
         <View>
             <ScrollView>
@@ -227,7 +232,7 @@ const Screen1 = () => {
                     <Castory />
                 </View>
                 <View>
-                    <ListSanPham />
+                    <ListSanPham navigation = {navigation} />
                 </View>
             </ScrollView>
         </View>
