@@ -1,8 +1,7 @@
 import {useReducer, createContext} from 'react'
+import data from './data'
 
 export const MyData = createContext()
-
-const data = []
 
 const reducer = (state, action) => {
     switch (action.type) {

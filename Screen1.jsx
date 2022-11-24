@@ -79,8 +79,8 @@ const GridView = ({ anh, firstname }) => {
 const GridViews = ({ hinhsanpham, tesanpham, gia, navigation}) => {
     
     const onHandlePress = ()=>{
-        console.log('onHandlePress');
-        navigation.navigate('Screen2', {gia})
+        console.log(tesanpham);
+        navigation.navigate('Screen2', {gia}, {hinhsanpham}, {tesanpham})
     }
 
     return (

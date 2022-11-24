@@ -2,7 +2,8 @@ import { View, Image, Text, TouchableOpacity, Button } from "react-native";
 
 export default function Screen2({route}) {
 
-
+    console.log(route.params.tesanpham);
+    
     return (
         <View>
             <View style={{ flexDirection: 'row', backgroundColor: '#09b333' }}>
@@ -16,7 +17,7 @@ export default function Screen2({route}) {
             </View>
 
             <View>
-                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>name</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{route.params.tesanpham}</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ marginRight: '10%' }}>{route.params.gia}</Text>
                     <Image source={require('./assets/icon_star.png')} />
@@ -38,7 +39,7 @@ export default function Screen2({route}) {
                 </View>
 
                 <View>
-                    <TouchableOpacity style={{flexDirection: 'row', backgroundColor: '#09b333', borderTopWidth: '10%'}}>
+                    <TouchableOpacity style={{flexDirection: 'row', backgroundColor: '#09b333'}}>
                         <Image source={require('./assets/icon_cart.jpg')}/>
                         <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold', marginLeft: '30%', paddingTop: '3%'}}>Add to cart</Text>
                     </TouchableOpacity>
