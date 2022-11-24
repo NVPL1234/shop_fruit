@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {useReducer, createContext} from 'react'
 import data from './data'
 
@@ -15,12 +16,17 @@ const reducer = (state, action) => {
             break;
     }
 }  
+=======
+import {createContext, useState} from 'react';
+export const MyData = createContext();
+>>>>>>> 0bd0287d9b043b4df20776c6755409efd93b09a2
 
 const Context = ({children}) => {
-    const [products, dispatch] = useReducer(reducer, data)
+    const [fruits, setFruits] = useState(require("./fruits"));
+    const [carts, setCarts] = useState(require("./carts"));
 
     return (
-        <MyData.Provider value={{products, dispatch}}>
+        <MyData.Provider value={{ fruits, carts }}>
             {children}
         </MyData.Provider>
     )
