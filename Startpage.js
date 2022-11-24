@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Button , Image} from 'react-native';
 
 
 
-export default function Screen0({ navigation })  {
+export default function Startpage({ navigation })  {
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ export default function Screen0({ navigation })  {
         <Text style={styles.content2}>Countrywide Free Deliverry</Text>
     </View>
       <View style={styles.button}>
-        <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Screen1')}} />
+        <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Homepage')}} />
       </View>
     </View>
   );

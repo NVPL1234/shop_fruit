@@ -1,27 +1,12 @@
-import {useReducer, createContext} from 'react'
-
-export const MyData = createContext()
-
-const data = []
-
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'GET':
-            return state = action.products
-        case 'ADD':
-            return [...state, action.product]
-        case 'DELETE':
-            return state = action.products 
-        default:
-            break;
-    }
-}  
+import {createContext, useState} from 'react';
+export const MyData = createContext();
 
 const Context = ({children}) => {
-    const [products, dispatch] = useReducer(reducer, data)
+    const [fruits, setFruits] = useState(require("./fruits"));
+    const [carts, setCarts] = useState(require("./carts"));
 
     return (
-        <MyData.Provider value={{products, dispatch}}>
+        <MyData.Provider value={{ fruits, carts }}>
             {children}
         </MyData.Provider>
     )
