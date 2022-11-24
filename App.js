@@ -15,10 +15,10 @@ const App = () => {
       <Context>
           <NavigationContainer>
               <Stack.Navigator>
-                  <Stack.Screen name='Startpage' component={Startpage} />
-                  <Stack.Screen name='Homepage' component={Homepage} />
+                  {/* <Stack.Screen name='Startpage' component={Startpage} /> */}
+                  {/* <Stack.Screen name='Homepage' component={Homepage} /> */}
                   <Stack.Screen name='Detailpage' component={Detailpage} />
-                  <Stack.Screen name='Cartpage' component={Cartpage} />
+                  {/* <Stack.Screen name='Cartpage' component={Cartpage} /> */}
               </Stack.Navigator>
           </NavigationContainer>
         </Context>
