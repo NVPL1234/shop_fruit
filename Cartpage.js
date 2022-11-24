@@ -1,5 +1,5 @@
-import { View } from 'react-native';
-import { NativeBaseProvider, Box, Image, Center, Text, HStack, Button, IconButton, Checkbox } from "native-base";
+import React from 'react';
+import { NativeBaseProvider, Box, Image, Center, Text, HStack, Button, IconButton, Checkbox, Pressable } from "native-base";
 import apple from './assets/apple.png';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -7,18 +7,37 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
+import { MyData } from './Context';
 
 
-export default function Cartpage() {
+export default function Cartpage({ navigation }) {
+
+  const { carts } = React.useContext(MyData);
+  const [listProduct, setListProduct] = React.useState([]);
+  const removeFromCart = (o) => {
+    for (let index = 0; index < carts.length; index++) {
+        const element = carts[index];
+        if(element.id === o.id) {
+            carts.splice(index,1);
+            setListProduct(carts);
+            console.log(carts);
+            break;
+        }
+    }
+    console.log('delete success');
+  }
+  React.useEffect(() => {
+    setListProduct(carts);
+  },[carts]);
 
   return (
     <NativeBaseProvider>
 
         <Box bg="success.500" p="3">
                 <HStack justifyContent="space-between" alignItems="center">
-                    <IconButton icon={<Ionicons name="md-chevron-back" size={24} color="white" />} />
+                    <IconButton icon={<Ionicons name="md-chevron-back" size={24} color="white" />} onPres={() => navigation.navigate("Homepage")}/>
                     <Text fontWeight="bold" color="white" fontSize="2xl">Shopping Cart</Text>
-                    <IconButton icon={<MaterialCommunityIcons name="dots-vertical" size={24} color="white" />} />
+                    <IconButton icon={<MaterialCommunityIcons name="dots-vertical" size={30} color="white" />} size="lg" />
                 </HStack>
                 <Center><Text color="white">2 items selected</Text></Center>
         </Box>
@@ -27,46 +46,32 @@ export default function Cartpage() {
                 <IconButton icon={<Foundation name="info" size={24} color="grey" />} />
                 <Text color="grey">Press long on item to remove them from cart</Text>
             </HStack>
-            <HStack alignItems="center" mx="2" my="1">
-                <Checkbox value="Photography" my="1" borderRadius="10" />
-                <Box bg="white" p="2" borderRadius="10" flex="1">
-                    <HStack alignItems="center">
-                        <Image source={apple} size={45} borderRadius={100} alt="fruitImage" />
-                        <Box px="2" flex="1">
-                            <Text>Red sweet mangoes</Text>
-                            <Text>52 kgs avaiables in stock</Text>
-                            <HStack alignItems="center">
-                                <Text flex="1">Subtotal: $24</Text>
-                                <HStack alignItems="center">
-                                    <IconButton icon={<AntDesign name="minussquareo" size={24} color="black" />}/>
-                                    <Text color="red.700" fontWeight="bold">1kg</Text>
-                                    <IconButton icon={<AntDesign name="plussquareo" size={24} color="black" />}/>
+            {
+                listProduct.map(o => {
+                    return <Pressable key={Math.random()} onLongPress={() => removeFromCart(o)}>
+                                <HStack alignItems="center" mx="2" my="1">
+                                    <Checkbox my="1" borderRadius="10" accessibilityLabel="This is a dummy checkbox" value="isSelected" colorScheme="purple" />
+                                    <Box bg="white" p="2" borderRadius="10" flex="1">
+                                        <HStack alignItems="center">
+                                            <Image source={o.image} size={45} borderRadius={100} alt="fruitImage" />
+                                            <Box px="2" flex="1">
+                                                <Text>{o.name}</Text>
+                                                <Text>{o.stock} kgs avaiables in stock</Text>
+                                                <HStack alignItems="center">
+                                                    <Text flex="1">Subtotal: ${o.price}.0</Text>
+                                                    <HStack alignItems="center">
+                                                        <IconButton icon={<AntDesign name="minussquareo" size={24} color="black" />}/>
+                                                        <Text color="red.700" fontWeight="bold">{o.quantity}kg</Text>
+                                                        <IconButton icon={<AntDesign name="plussquareo" size={24} color="black" />}/>
+                                                    </HStack>
+                                                </HStack>
+                                            </Box>
+                                        </HStack>
+                                    </Box>
                                 </HStack>
-                            </HStack>
-                        </Box>
-                    </HStack>
-                </Box>
-            </HStack>
-            <HStack alignItems="center" mx="2" my="1">
-                <Checkbox value="Photography" my="1" borderRadius="10" />
-                <Box bg="white" p="2" borderRadius="10" flex="1">
-                    <HStack alignItems="center">
-                        <Image source={apple} size={45} borderRadius={100} alt="fruitImage" />
-                        <Box px="2" flex="1">
-                            <Text>Red sweet mangoes</Text>
-                            <Text>52 kgs avaiables in stock</Text>
-                            <HStack alignItems="center">
-                                <Text flex="1">Subtotal: $24</Text>
-                                <HStack alignItems="center">
-                                    <IconButton icon={<AntDesign name="minussquareo" size={24} color="black" />}/>
-                                    <Text color="red.700" fontWeight="bold">1kg</Text>
-                                    <IconButton icon={<AntDesign name="plussquareo" size={24} color="black" />}/>
-                                </HStack>
-                            </HStack>
-                        </Box>
-                    </HStack>
-                </Box>
-            </HStack>
+                    </Pressable>
+                })
+            }
         </Box>
 
         <Box>
