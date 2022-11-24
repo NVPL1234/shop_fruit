@@ -12,19 +12,30 @@ import { MyData } from './Context';
 
 export default function Cartpage({ navigation }) {
 
+    console.log('App rerender');
   const { carts } = React.useContext(MyData);
   const [listProduct, setListProduct] = React.useState([]);
   const removeFromCart = (o) => {
-    for (let index = 0; index < carts.length; index++) {
-        const element = carts[index];
-        if(element.id === o.id) {
-            carts.splice(index,1);
-            setListProduct(carts);
-            console.log(carts);
-            break;
+    setListProduct(prev => prev.filter((val) => {
+        if(val.id !== o.id) {
+            return val;
         }
-    }
-    console.log('delete success');
+    }));
+    // for (let index = 0; index < listProduct.length; index++) {
+    //     const element = listProduct[index];
+    //     if(element.id === o.id) {
+    //         setListProduct(prev => prev.filter((val) => {
+    //             if(val.id !== o.id) {
+    //                 return val;
+    //             }
+    //         }));
+    //         carts.splice(index,1);
+    //         console.log('delete success');
+    //         setTimeout(() => {
+    //             setListProduct(carts);
+    //         }, 500);
+    //     }
+    // }
   }
   React.useEffect(() => {
     setListProduct(carts);
