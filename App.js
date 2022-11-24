@@ -6,6 +6,7 @@ import Startpage from './Startpage';
 import Homepage from './Homepage';
 import Detailpage from './Detailpage';
 import Cartpage from './Cartpage';
+import Productpage from './Productpage';
 
 
 const Stack = createNativeStackNavigator()
@@ -19,6 +20,7 @@ const App = () => {
                   <Stack.Screen name='Homepage' component={Homepage} />
                   <Stack.Screen name='Detailpage' component={Detailpage} />
                   <Stack.Screen name='Cartpage' component={Cartpage} />
+                  <Stack.Screen name='Productpage' component={Productpage} />
               </Stack.Navigator>
           </NavigationContainer>
         </Context>

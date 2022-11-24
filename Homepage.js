@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import apple from './assets/apple.png';
 import apples from './assets/apples.png';
 import { MyData } from './Context';
+import Toast from 'react-native-toast-message';
 
 export default function Homepage({ navigation }) {
 
@@ -21,12 +22,13 @@ export default function Homepage({ navigation }) {
 
   return (
     <NativeBaseProvider accessible={true}>
+    <Box zIndex="1"><Toast position='top' bottomOffset={20} /></Box>
       <Box p="3" flex="1">
           <ScrollView>
                 <Box>
                     <Input variant="rounded" placeholder="Try for 'Oranges'" bg="white"
-                        InputLeftElement={<Icon as={<FontAwesome name="search-plus" size={30} color="black" />} size={5} ml="2" color="muted.400" />}
-                        InputRightElement={<Icon as={<FontAwesome5 name="cart-plus" size={24} color="black" />} mr="2" color="success.600" onPress={() => navigation.navigate("Cartpage")} />}
+                        InputLeftElement={<Icon as={<FontAwesome name="search-plus" size={24} color="black" />} size={5} ml="2" color="muted.400" size="lg" />}
+                        InputRightElement={<Icon as={<FontAwesome5 name="cart-plus" size={24} color="black" />} mr="2" color="success.600" onPress={() => navigation.navigate("Cartpage")} size="lg" />}
                     />
                 </Box>
 
@@ -38,10 +40,11 @@ export default function Homepage({ navigation }) {
                     <HStack alignItems="center">
                         <Text flex="1" fontSize="lg">Fruit Categories</Text>
                         <Text>Show All</Text>
-                        <IconButton icon={<AntDesign name="right" size={24} color="black" />}/>
+                        <IconButton icon={<AntDesign name="right" size={24} color="black" />} onPress={() => navigation.navigate("Productpage")} />
                     </HStack>
                 </Box>
                 <Box>
+                    <ScrollView nestedScrollEnabled="true" horizontal="true">
                     <HStack>
                         {
                             fruits.map(o => {
@@ -56,13 +59,14 @@ export default function Homepage({ navigation }) {
                             })
                         }
                     </HStack>
+                    </ScrollView>
                 </Box>
 
                 <Box>
                     <HStack alignItems="center">
                         <Text flex="1" fontSize="lg">Most popular</Text>
                         <Text>Show All</Text>
-                        <IconButton icon={<AntDesign name="right" size={24} color="black" />}/>
+                        <IconButton icon={<AntDesign name="right" size={24} color="black" />} onPress={() => navigation.navigate("Productpage")} />
                     </HStack>
                 </Box>
                 <Box>
@@ -88,7 +92,7 @@ export default function Homepage({ navigation }) {
                     <HStack alignItems="center">
                         <Text flex="1" fontSize="lg">Suggested for you</Text>
                         <Text>Show All</Text>
-                        <IconButton icon={<AntDesign name="right" size={24} color="black" />}/>
+                        <IconButton icon={<AntDesign name="right" size={24} color="black" />} onPress={() => navigation.navigate("Productpage")} />
                     </HStack>
                 </Box>
                 <Box>
@@ -103,7 +107,7 @@ export default function Homepage({ navigation }) {
                                                 </Box>
                                                 <Text>{o.name}</Text>
                                                 <Text strikeThrough color="error.400">${o.price}.0</Text>
-                                                <Text fontWeight="bold" color="success.400">${o.price}.0</Text>
+                                                <Text fontWeight="bold" color="success.400">${(o.price - o.sale).toFixed(2)}</Text>
                                             </Center>
                                         </Pressable>
                             })

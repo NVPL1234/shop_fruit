@@ -7,24 +7,24 @@ export default function Startpage({ navigation })  {
 
   return (
     <View style={styles.container}>
-     <View>
-         <Image style={styles.img1} source={require('./images/screen1img01.png')} />
-     </View>
-      <View>
-        <Text style={styles.content1}>Fruitix</Text>
-      </View>
-      <View>
-        <Text style={styles.content2}>We delivering fresh Fruits</Text>
-      </View>
-      <View>
-         <Image style={styles.img1} source={require('./images/screen1img02.png')} />
-     </View>
-     <View>
-        <Text style={styles.content2}>Countrywide Free Deliverry</Text>
-    </View>
-      <View style={styles.button}>
-        <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Homepage')}} />
-      </View>
+        <View>
+            <Image style={styles.img1} source={require('./images/screen1img01.png')} />
+        </View>
+        <View>
+            <Text style={styles.content1}>Fruitix</Text>
+        </View>
+        <View>
+            <Text style={styles.content2}>We delivering fresh Fruits</Text>
+        </View>
+        <View>
+            <Image style={styles.img1} source={require('./images/screen1img02.png')} />
+        </View>
+        <View>
+            <Text style={styles.content2}>Countrywide Free Deliverry</Text>
+        </View>
+        <View style={{ margin:50 }}>
+            <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Homepage')}} />
+        </View>
     </View>
   );
 }
@@ -49,8 +49,5 @@ const styles = StyleSheet.create({
    textAlign:'center',
    marginTop:10
    
-  },
-  button:{
-    marginTop:50
   }
 });
