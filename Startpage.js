@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Button , Image} from 'react-native';
+import { StyleSheet, View, Text, Button , Image, ScrollView} from 'react-native';
 
 
 
@@ -7,6 +7,7 @@ export default function Startpage({ navigation })  {
 
   return (
     <View style={styles.container}>
+        <ScrollView>
         <View>
             <Image style={styles.img1} source={require('./images/screen1img01.png')} />
         </View>
@@ -25,6 +26,7 @@ export default function Startpage({ navigation })  {
         <View style={{ margin:50 }}>
             <Button color={"#00cc00"} title='Get Started' onPress={()=>{navigation.navigate('Homepage')}} />
         </View>
+        </ScrollView>
     </View>
   );
 }

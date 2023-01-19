@@ -8,6 +8,8 @@ import apple from './assets/apple.png';
 import apples from './assets/apples.png';
 import { MyData } from './Context';
 import Toast from 'react-native-toast-message';
+import { Animated } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Homepage({ navigation }) {
 
@@ -15,10 +17,27 @@ export default function Homepage({ navigation }) {
   const popularFruits = fruits.sort((a,b) => a.rating - b.rating);
   const suggestFruits = fruits.sort((a,b) => b.sale - a.sale);
 
+  const anim = React.useRef(new Animated.Value(0)).current;
+
+  const rotateFunction = anim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["0deg", "360deg"]
+  });
+
   const onClickItem = (item) => {
-    console.log('data: ', item);
     navigation.navigate("Detailpage", {item: item});
   }
+
+  React.useEffect(() => {
+    const objAnimated = Animated.loop(
+        Animated.timing(anim, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true
+        })
+    );
+    objAnimated.start();
+  },[]);
 
   return (
     <NativeBaseProvider accessible={true}>
@@ -27,13 +46,25 @@ export default function Homepage({ navigation }) {
           <ScrollView>
                 <Box>
                     <Input variant="rounded" placeholder="Try for 'Oranges'" bg="white"
-                        InputLeftElement={<Icon as={<FontAwesome name="search-plus" size={24} color="black" />} size={5} ml="2" color="muted.400" size="lg" />}
+                        InputLeftElement={<Icon as={<FontAwesome name="search-plus" size={24} color="black" />} size={5} ml="2" color="muted.400" />}
                         InputRightElement={<Icon as={<FontAwesome5 name="cart-plus" size={24} color="black" />} mr="2" color="success.600" onPress={() => navigation.navigate("Cartpage")} size="lg" />}
                     />
                 </Box>
 
                 <Box py="5">
-                    <Center><Image source={banner} alt="banner" size={100} borderRadius={10} w="400" /></Center>
+                    <HStack>
+                        <Animated.View style={{position:'relative', justifyContent:'center', alignItems:'center'}}>
+                            <Animated.View style={{transform: [{ rotate: rotateFunction }] }}>
+                                <MaterialCommunityIcons name="fruit-pineapple" size={24} color="green" />
+                            </Animated.View>
+                        </Animated.View>
+                        <Center flex="1"><Image source={banner} alt="banner" size={100} borderRadius={10} w="400" /></Center>
+                        <Animated.View style={{position:'relative', justifyContent:'center', alignItems:'center'}}>
+                            <Animated.View style={{transform: [{ rotate: rotateFunction }] }}>
+                                <MaterialCommunityIcons name="fruit-watermelon" size={24} color="green" />
+                            </Animated.View>
+                        </Animated.View>
+                    </HStack>
                 </Box>
 
                 <Box>
@@ -44,7 +75,6 @@ export default function Homepage({ navigation }) {
                     </HStack>
                 </Box>
                 <Box>
-                    <ScrollView nestedScrollEnabled="true" horizontal="true">
                     <HStack>
                         {
                             fruits.map(o => {
@@ -59,7 +89,6 @@ export default function Homepage({ navigation }) {
                             })
                         }
                     </HStack>
-                    </ScrollView>
                 </Box>
 
                 <Box>

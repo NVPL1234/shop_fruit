@@ -14,9 +14,8 @@ import Toast from 'react-native-toast-message';
 
 export default function Cartpage({ navigation }) {
 
-  console.log('App rerender');
   const { carts } = React.useContext(MyData);
-  const [listProduct, setListProduct] = React.useState([]);
+  const [listProduct, setListProduct] = React.useState(carts);
   const removeFromCart = (o) => {
     console.log('Delete success');
     Toast.show({
@@ -29,11 +28,28 @@ export default function Cartpage({ navigation }) {
             return val;
         }
     }));
+    for (let index = 0; index < carts.length; index++) {
+        const element = carts[index];
+        if(element.id === o.id) {
+            carts.splice(index,1);
+        }
+    }
   }
-  const [quantity, setQuantity] = React.useState(1);
   React.useEffect(() => {
-    setListProduct(carts);
-  },[carts]);
+    Object.assign(carts, listProduct);
+  },[listProduct]);
+
+  const minusQuantityForItem = (o) => {
+    setListProduct(prev => prev.map(item => (
+        item.id === o.id ? {...item, quantity:o.quantity-1} : item
+    )));
+  }
+
+  const plusQuantityForItem = (o) => {
+    setListProduct(prev => prev.map(item => (
+        item.id === o.id ? {...item, quantity:o.quantity+1} : item
+    )));
+  }
 
   return (
     <NativeBaseProvider>
@@ -67,9 +83,9 @@ export default function Cartpage({ navigation }) {
                                                     <HStack alignItems="center">
                                                         <Text flex="1">Subtotal: ${o.price}.0</Text>
                                                         <HStack alignItems="center">
-                                                            <IconButton icon={<AntDesign name="minussquareo" size={24} color="black" />} onPress={() => setQuantity(prev => prev - 1)} />
-                                                            <Text color="red.700" fontWeight="bold">{quantity}kg</Text>
-                                                            <IconButton icon={<AntDesign name="plussquareo" size={24} color="black" />} onPress={() => setQuantity(prev => prev + 1)} />
+                                                            <IconButton icon={<AntDesign name="minussquareo" size={24} color="black" />} onPress={() => minusQuantityForItem(o)} />
+                                                            <Text color="red.700" fontWeight="bold">{o.quantity}kg</Text>
+                                                            <IconButton icon={<AntDesign name="plussquareo" size={24} color="black" />} onPress={() => plusQuantityForItem(o)} />
                                                         </HStack>
                                                     </HStack>
                                                 </Box>

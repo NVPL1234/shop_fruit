@@ -22,12 +22,23 @@ export default function Detailpage({ route, navigation }) {
       });
       return;
     }
+    for (let index = 0; index < carts.length; index++) {
+        const element = carts[index];
+        if(element.id === item.id) {
+            Toast.show({
+                type: 'error',
+                text1: 'Product existed in your cart',
+                text2: 'Please try again...'
+            });
+            return;
+        }
+    }
     Toast.show({
         type: 'success',
         text1: 'Added product to your carts',
         text2: 'Let check it out...'
     });
-    carts.push(item);
+    carts.push({...item, quantity: quantity});
     console.log('Carts added.');
   }
 

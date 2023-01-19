@@ -24,7 +24,7 @@ export default function Productpage({ navigation }) {
         text1: 'Added product to your carts',
         text2: 'Let check it out...'
     });
-    fruits.push(o);
+    carts.push({...o, quantity: quantity});
   };
 
   return (
